@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>وزارة التربية الوطنية - نتائج الأبناء</title>
+<link href="https://awlyaa.education.dz/public/assets/images/favicon.png?v=1.0.2" rel="icon" sizes="16x16" type="image/png"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* صفحة تسجيل الدخول */
+        .login-page {
+            background: url('https://awlyaa.education.dz/public/assets/images/background/bg-2.jpg?v=1.0.2') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .login-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 58, 108, 0.85);
+            z-index: 0;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 15px 30px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 70px;
+            height: 70px;
+            background: #1a3a6c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            box-shadow: 0 0 15px rgba(26, 58, 108, 0.5);
+        }
+        
+        .logo i {
+            color: white;
+            font-size: 30px;
+        }
+        
+        .title {
+            color: #1a3a6c;
+        }
+        
+        .title h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .title p {
+            font-size: 1rem;
+            color: #2c5a9d;
+            font-weight: 500;
+        }
+        
+        .login-container {
+            max-width: 1000px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            display: flex;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .welcome-section {
+            flex: 1;
+            background: linear-gradient(to bottom right, rgba(26, 58, 108, 0.9), rgba(44, 90, 157, 0.9));
+            color: white;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 0;
+        }
+        
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .welcome-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .welcome-section p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            line-height: 1.8;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .features {
+            margin-top: 30px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .feature i {
+            font-size: 24px;
+            margin-left: 15px;
+            color: #ffd700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .login-section {
+            flex: 1;
+            padding: 50px 40px;
+            background: white;
+        }
+        
+        .login-section h2 {
+            color: #1a3a6c;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .login-section p {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1a3a6c;
+            font-weight: 600;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1a3a6c;
+            font-size: 18px;
+        }
+        
+        .input-with-icon input {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .input-with-icon input:focus {
+            border-color: #1a3a6c;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 58, 108, 0.2);
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .remember {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember input {
+            margin-left: 8px;
+        }
+        
+        .forgot-password {
+            color: #1a3a6c;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+            color: #2c5a9d;
+        }
+        
+        .btn-login {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #1a3a6c, #2c5a9d);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(26, 58, 108, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-login:hover {
+            background: linear-gradient(to right, #15305a, #1f4a87);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(26, 58, 108, 0.4);
+        }
+        
+        .btn-login::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(30deg);
+            transition: all 0.6s;
+        }
+        
+        .btn-login:hover::after {
+            transform: rotate(30deg) translate(50%, 50%);
+        }
+        
+        .error-message {
+            color: #d9534f;
+            background-color: #fdf7f7;
+            border: 1px solid #eed3d7;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+            animation: shake 0.5s;
+        }
+        
+        .success-message {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border: 1px solid #d6e9c6;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: auto;
+            font-size: 0.9rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #ffd700;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+        
+        /* صفحة النتائج */
+        .results-page {
+            display: none;
+            min-height: 100vh;
+            background: #f4f6f9;
+        }
+        
+        .results-header {
+            background: #1976d2;
+            padding: 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .results-header img {
+            height: 40px;
+            margin-left: 15px;
+        }
+        
+        .results-title {
+            text-align: right;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .results-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .panel {
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .panel-title {
+            background-color: #1976d2;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+        }
+        
+        .panel-content {
+            padding: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .panel-content strong {
+            color: #1976d2;
+        }
+        
+        .btn {
+            background-color: #4a4ae6;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: default;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #fdecec;
+        }
+        
+        tfoot td {
+            background-color: #f44336;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .results-footer {
+            background-color: #1976d2;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+        }
+        
+        .student-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 10px 0;
+        }
+        
+        .student-info .text {
+            flex: 1;
+        }
+        
+        .student-info img {
+            width: 100px;
+            margin-left: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .logout-container {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+        }
+        
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+        
+        @keyframes shake {
+            0%, 100% {transform: translateX(0);}
+            10%, 30%, 50%, 70%, 90% {transform: translateX(-10px);}
+            20%, 40%, 60%, 80% {transform: translateX(10px);}
+        }
+        
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+            }
+            
+            .welcome-section, .login-section {
+                padding: 30px 25px;
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo-container {
+                margin-bottom: 15px;
+                justify-content: center;
+            }
+            
+            .student-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .student-info img {
+                margin: 15px 0;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- صفحة تسجيل الدخول -->
+<div class="login-page" id="loginPage">
+<div class="header">
+<div class="logo-container">
+<div class="logo">
+<i class="fas fa-graduation-cap"></i>
+</div>
+<div class="title">
+<h1>بوابة وزارة التربية الوطنية</h1>
+<p>نظام إدارة المؤسسات التربوية</p>
+</div>
+</div>
+<div class="contact-info">
+<p><i class="fas fa-phone"></i> 023456789 | <i class="fas fa-envelope"></i> contact@education.dz</p>
+</div>
+</div>
+<div class="login-container">
+<div class="welcome-section">
+<div class="welcome-content">
+<h2>مرحبًا بكم في البوابة التعليمية</h2>
+<p>تقدم وزارة التربية الوطنية هذه المنصة لتمكين الطلاب والمعلمين والإداريين من الوصول إلى خدماتهم التعليمية بسهولة وأمان.</p>
+<div class="features">
+<div class="feature">
+<i class="fas fa-check-circle"></i>
+<span>الوصول إلى النتائج والبيانات التعليمية</span>
+</div>
+<div class="feature">
+<i class="fas fa-check-circle"></i>
+<span>إدارة الحسابات الشخصية</span>
+</div>
+<div class="feature">
+<i class="fas fa-check-circle"></i>
+<span>التواصل مع المؤسسات التعليمية</span>
+</div>
+<div class="feature">
+<i class="fas fa-check-circle"></i>
+<span>خدمات تعليمية متكاملة</span>
+</div>
+</div>
+</div>
+</div>
+<div class="login-section">
+<h2>تسجيل الدخول</h2>
+<p>الرجاء إدخال بيانات الاعتماد للوصول إلى حسابك</p>
+<form id="loginForm">
+<div class="form-group">
+<label for="email">البريد الإلكتروني</label>
+<div class="input-with-icon">
+<i class="fas fa-envelope"></i>
+<input id="email" placeholder="أدخل بريدك الإلكتروني" required="" type="email"/>
+</div>
+</div>
+<div class="form-group">
+<label for="password">كلمة المرور</label>
+<div class="input-with-icon">
+<i class="fas fa-lock"></i>
+<input id="password" placeholder="أدخل كلمة المرور" required="" type="password"/>
+</div>
+</div>
+<div class="remember-forgot">
+<div class="remember">
+<input id="remember" type="checkbox"/>
+<label for="remember">تذكرني</label>
+</div>
+<a class="forgot-password" href="#">نسيت كلمة المرور؟</a>
+</div>
+<button class="btn-login" onclick="login()" type="button">تسجيل الدخول</button>
+</form>
+<div class="error-message" id="errorMessage">
+                    البريد الإلكتروني أو كلمة المرور غير صحيحة!
+                </div>
+<div class="success-message" id="successMessage">
+                    تم تسجيل الدخول بنجاح! يتم توجيهك الآن...
+                </div>
+</div>
+</div>
+<div class="footer">
+<div class="social-links">
+<a href="#"><i class="fab fa-facebook-f"></i></a>
+<a href="#"><i class="fab fa-twitter"></i></a>
+<a href="#"><i class="fab fa-youtube"></i></a>
+</div>
+<div class="copyright">
+                © 2023 وزارة التربية الوطنية - الجزائر. جميع الحقوق محفوظة.
+            </div>
+</div>
+</div>
+<!-- صفحة نتائج الأبناء -->
+
+<script>
+        // بيانات تسجيل الدخول الصحيحة
+        const correctEmail = "jounousamoulmi@gmail.com";
+        const correctPassword = "oulmidjoud2009";
+
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (email === correctEmail && password === correctPassword) {
+                window.location.href = 'dashboard.html';
+            } else {
+                document.getElementById('errorMessage').style.display = "block";
+            }
+        }
+
+        document.getElementById('password').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                login();
+            }
+        });
+        </script>
+</body>
+</html>
